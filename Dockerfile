@@ -14,9 +14,10 @@ RUN apt-get install -y \
     pandoc
 
 RUN R -e "install.packages('devtools', repos = 'http://cran.stat.nus.edu.sg')"
+RUN R -e "install.packages('plyr', repos = 'http://cran.stat.nus.edu.sg')"
 RUN R -e "install.packages('networkD3', repos = 'http://cran.stat.nus.edu.sg')"
 RUN R -e "devtools::install_github('fbreitwieser/sankeyD3')"
-
+RUN R -e "install.packages('htmlwidgets', repos = 'http://cran.stat.nus.edu.sg')"
 
 
 ARG UNAME=testuser
@@ -32,4 +33,3 @@ COPY package.json ./
 COPY node.js ./
 COPY runDocker.js ./
 
-EXPOSE 80/tcp
