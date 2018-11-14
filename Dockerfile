@@ -17,8 +17,6 @@ RUN R -e "install.packages('devtools', repos = 'http://cran.stat.nus.edu.sg')"
 RUN R -e "install.packages('plyr', repos = 'http://cran.stat.nus.edu.sg')"
 RUN R -e "install.packages('networkD3', repos = 'http://cran.stat.nus.edu.sg')"
 RUN R -e "devtools::install_github('fbreitwieser/sankeyD3')"
-RUN R -e "install.packages('htmlwidgets', repos = 'http://cran.stat.nus.edu.sg')"
-
 
 ARG UNAME=testuser
 ARG UID=1000
@@ -32,4 +30,9 @@ COPY krakenSankey.R ./
 COPY package.json ./
 COPY node.js ./
 COPY runDocker.js ./
+
+RUN npm install
+EXPOSE 8000/tcp
+ENTRYPOINT ["node", "node.js"]
+
 

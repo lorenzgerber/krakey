@@ -42,7 +42,7 @@ app.get('/sankey/:id', function (req, res) {
   reportHtml = './' + requestedFile;
   console.log(reportHtml)
 
-  absoluteReportHtml = '/home/lgerber/git/server/' + requestedFile
+  absoluteReportHtml = '/home/testuser/' + requestedFile
   
   let checkFileExists = s => new Promise(r=>fs.access(s, fs.F_OK, e => r(!e))); 
   checkFileExists(reportHtml).then(res.sendFile(absoluteReportHtml));

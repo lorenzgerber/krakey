@@ -5,7 +5,7 @@ module.exports = {
 
     runDocker(fileName){
 
-        const ls = spawn('docker', ['run', '-v', '/home/lgerber/git/server/:/data/', 'lorenzgerber/krakensankey', fileName] );
+        const ls = spawn('Rscript', ['krakenSankey.R', fileName] );
         ls.stdout.on('data', (data) => {
             console.log(`stdout: ${data}`);
         });
