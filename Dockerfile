@@ -32,7 +32,6 @@ COPY node.js ./
 COPY runDocker.js ./
 
 RUN npm install
-EXPOSE 8000/tcp
 ENTRYPOINT ["node", "node.js"]
 
 
