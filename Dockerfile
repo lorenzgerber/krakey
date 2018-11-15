@@ -29,7 +29,8 @@ WORKDIR /home/$UNAME/
 COPY krakenSankey.R ./
 COPY package.json ./
 COPY node.js ./
-COPY runDocker.js ./
+COPY runSankey.js ./
+COPY removeFile.js ./
 
 RUN npm install
 ENTRYPOINT ["node", "node.js"]

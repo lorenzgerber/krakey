@@ -3,7 +3,7 @@ const { spawn } = require('child_process');
 module.exports = {
     
 
-    runDocker(fileName){
+    runSankey (fileName){
 
         const ls = spawn('Rscript', ['krakenSankey.R', fileName] );
         ls.stdout.on('data', (data) => {
@@ -17,7 +17,7 @@ module.exports = {
         ls.on('close', (code) => {
             console.log(`child process exited with code ${code}`);
         }); 
-    },
+    }
 
 }
 

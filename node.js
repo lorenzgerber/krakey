@@ -28,24 +28,36 @@ app.post('/upload', function(req, res) {
     res.send('File uploaded!');
   });
 
-  const cliInter = require ('./runDocker.js');
-  cliInter.runDocker(sampleFile.name);
-
-  
+  // Generating Report
+  const cliInter = require ('./runSankey.js');
+  cliInter.runSankey(sampleFile.name);
 });
 
 app.get('/sankey/:id', function (req, res) {
+
+  const rm = require ('./removeFile.js');
     
   var requestedFile = req.params.id;
   
-  const fs = require('fs')
+  const fs = require('fs');
   reportHtml = './' + requestedFile;
-  console.log(reportHtml)
+  console.log(reportHtml);
 
-  absoluteReportHtml = '/home/testuser/' + requestedFile
-  
+  var absoluteReportHtml = '/home/testuser/' + requestedFile
+  var basename = absoluteReportHtml.substr(0, absoluteReportHtml.lastIndexOf('.')) || absoluteReportHtml;
+  var report = basename + '.report';
+  console.log(report)
+
   let checkFileExists = s => new Promise(r=>fs.access(s, fs.F_OK, e => r(!e))); 
-  checkFileExists(reportHtml).then(res.sendFile(absoluteReportHtml));
+  checkFileExists(reportHtml)
+  .then(function(){
+    res.sendFile(absoluteReportHtml);
+  }).then(function(){
+    rm.removeFile(report);
+  }).then(function(){
+    res.on("finish", () => rm.removeFile(absoluteReportHtml))
+  });
+
 })
 
 
