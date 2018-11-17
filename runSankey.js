@@ -1,11 +1,13 @@
-const { spawn } = require('child_process');
+const { spawnSync } = require('child_process');
 
 module.exports = {
     
 
-    runSankey (fileName){
+    runSankey (fileName ){
 
-        const ls = spawn('Rscript', ['krakenSankey.R', fileName] );
+        const ls = spawnSync('Rscript',['krakenSankey.R', fileName]);
+
+        /*
         ls.stdout.on('data', (data) => {
             console.log(`stdout: ${data}`);
         });
@@ -16,7 +18,7 @@ module.exports = {
 
         ls.on('close', (code) => {
             console.log(`child process exited with code ${code}`);
-        }); 
+        });*/
     }
 
 }

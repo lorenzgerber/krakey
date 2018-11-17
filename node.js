@@ -8,9 +8,11 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const app = express();
+const fs = require('fs');
 
 // default options
 app.use(fileUpload());
+//app.maxConnections = 10;
 
 app.post('/upload', function(req, res) {
   if (Object.keys(req.files).length == 0) {
@@ -28,9 +30,13 @@ app.post('/upload', function(req, res) {
     res.send('File uploaded!');
   });
 
-  // Generating Report
-  const cliInter = require ('./runSankey.js');
-  cliInter.runSankey(sampleFile.name);
+  let sample = './' + sampleFile.name
+  let checkFileExists = s => new Promise(r=>fs.access(s, fs.F_OK, e => r(!e))); 
+  checkFileExists(sample)
+  .then(function(){
+    const cliInter = require ('./runSankey.js');
+    cliInter.runSankey(sampleFile.name);    
+  });
 });
 
 app.get('/sankey/:id', function (req, res) {
@@ -39,7 +45,7 @@ app.get('/sankey/:id', function (req, res) {
     
   var requestedFile = req.params.id;
   
-  const fs = require('fs');
+  
   reportHtml = './' + requestedFile;
   console.log(reportHtml);
 
@@ -59,8 +65,6 @@ app.get('/sankey/:id', function (req, res) {
   });
 
 })
-
-
 
 app.listen(8000, function() {
   console.log('Express server listening on port 8000'); // eslint-disable-line
