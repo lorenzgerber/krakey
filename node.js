@@ -12,7 +12,6 @@ const fs = require('fs');
 
 // default options
 app.use(fileUpload());
-//app.maxConnections = 10;
 
 app.post('/upload', function(req, res) {
   if (Object.keys(req.files).length == 0) {
