@@ -1,9 +1,13 @@
-FROM node:10
-
+FROM node:10-stretch
 ENV DEBIAN_FRONTEND=noninteractive
-COPY ranke.asc /
-RUN echo "deb http://cran.stat.nus.edu.sg/bin/linux/debian jessie-cran35/" >> /etc/apt/sources.list
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y dirmngr --install-recommends
+RUN apt-get install -y software-properties-common
+RUN apt-get install -y curl apt-transport-https
+RUN apt-get update && apt-get upgrade -y
+COPY ranke.asc / 
 RUN apt-key add ranke.asc
+RUN echo "deb https://cloud.r-project.org/bin/linux/debian stretch-cran35/" >> /etc/apt/sources.list
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y \
     build-essential \
@@ -34,5 +38,4 @@ COPY removeFile.js ./
 
 RUN npm install
 ENTRYPOINT ["node", "node.js"]
-
 
