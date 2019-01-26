@@ -9,9 +9,14 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const app = express();
 const fs = require('fs');
+const path = require('path')
 
 // default options
 app.use(fileUpload());
+
+
+app.get('/', (req, res) => res.sendFile(path.join(__dirname+'/index.html')));
+app.get('/about', (req, res) => res.sendFile(path.join(__dirname+'/about.html')));
 
 app.post('/upload', function(req, res) {
   if (Object.keys(req.files).length == 0) {

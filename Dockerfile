@@ -35,6 +35,8 @@ COPY package.json ./
 COPY node.js ./
 COPY runSankey.js ./
 COPY removeFile.js ./
+COPY index.html ./
+COPY about.html ./
 
 RUN npm install
 ENTRYPOINT ["node", "node.js"]
