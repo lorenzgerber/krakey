@@ -29,15 +29,17 @@ RUN groupadd -g $GID -o $UNAME
 RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
 USER $UNAME
 WORKDIR /home/$UNAME/
+RUN mkdir view
 
 COPY krakenSankey.R ./
 COPY package.json ./
 COPY node.js ./
 COPY runSankey.js ./
 COPY removeFile.js ./
-COPY index.html ./
-COPY about.html ./
+COPY index.html ./view/
+COPY about.html ./view/
 
 RUN npm install
+EXPOSE 8080
 ENTRYPOINT ["node", "node.js"]
 

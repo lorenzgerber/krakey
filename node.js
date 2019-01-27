@@ -15,8 +15,8 @@ const path = require('path')
 app.use(fileUpload());
 
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname+'/index.html')));
-app.get('/about', (req, res) => res.sendFile(path.join(__dirname+'/about.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname+'/view/index.html')));
+app.get('/about', (req, res) => res.sendFile(path.join(__dirname+'/view/about.html')));
 
 app.post('/upload', function(req, res) {
   if (Object.keys(req.files).length == 0) {
@@ -70,7 +70,7 @@ app.get('/sankey/:id', function (req, res) {
 
 })
 
-app.listen(8000, function() {
+app.listen(8080, function() {
   console.log('Express server listening on port 8000'); // eslint-disable-line
 });
 
