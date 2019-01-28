@@ -1,12 +1,13 @@
 version: '3'
 
 services:
+
   nodejs:
+    image: lorenzgerber/nodekrakey:latest
     build:
       context: .
       dockerfile: Dockerfile
-    image: nodejs
-    container_name: nodejs
+    container_name: nodekrakey
     restart: unless-stopped
     networks:
       - app-network
