@@ -25,10 +25,10 @@
       <h1>Krakey API</h1>
       <p>Krakey is an REST API to process Kraken.report files into sankey plots.</p>
       <p>To convert a kraken.report file, make a POST request for example using curl: <br>
-      <code>curl -k -X POST -F “sampleFile=@example.report” “krakey.info/upload”</code><br>
+      <code>curl -k -X POST -F "sampleFile=@example.report" "https://krakey.info/upload"</code><br>
       <p>The file will then be converted into a html sankey plot using sankeyD3 from F. Breitwieser.
         To obtain the sankey plot, perform a GET request:
-      <code>wget krakey.info/sankey/example.html</code>
+      <code>wget https://krakey.info/sankey/example.html</code>
       </p>
     </div>
   </div>
